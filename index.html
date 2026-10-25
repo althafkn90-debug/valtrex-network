@@ -1,419 +1,320 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080812">
+  <meta name="description" content="Welcome to VALTREX NETWORK — your next Minecraft adventure.">
+  <title>ᴠᴀʟᴛʀᴇx ɴᴇᴛᴡᴏʀᴋ | Minecraft</title>
 
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&display=swap');
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-:root {
-  --cyan: #00f7ff;
-  --purple: #9b36ff;
-  --pink: #ff28ce;
-  --bg: #050414;
-}
+  <link rel="stylesheet" href="style.css">
+</head>
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+<body>
+  <div class="rgb-background"></div>
+  <div class="grid-overlay"></div>
+  <div class="particles" id="particles"></div>
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 90px;
-}
+  <!-- NAVIGATION -->
+  <header class="navbar">
+    <a class="brand" href="#home">
+      <span class="brand-icon">V</span>
+      <span>VALTREX <b>NETWORK</b></span>
+    </a>
 
-body {
-  min-height: 100vh;
-  overflow-x: hidden;
-  color: white;
-  font-family: 'Orbitron', sans-serif;
-  background:
-    radial-gradient(ellipse at 10% 20%, #063c7355, transparent 40%),
-    radial-gradient(ellipse at 90% 30%, #69008055, transparent 40%),
-    radial-gradient(ellipse at 50% 90%, #003f7755, transparent 45%),
-    var(--bg);
-  background-size: 200% 200%;
-  animation: backgroundMove 12s ease infinite;
-  position: relative;
-}
+    <button class="menu-toggle" id="menuToggle"
+            aria-label="Toggle navigation" aria-expanded="false">
+      ☰
+    </button>
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: -50%;
-  z-index: -1;
-  pointer-events: none;
-  background: conic-gradient(
-    #00f7ff33,
-    #174aff33,
-    #a100ff44,
-    #ff00c833,
-    #ff9d3633,
-    #00ff8833,
-    #00f7ff33
-  );
-  filter: blur(100px);
-  animation: rotateRGB 22s linear infinite;
-}
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">HOME</a>
+      <a href="#features">FEATURES</a>
+      <a href="#ranks">RANKS</a>
+      <a href="#community">COMMUNITY</a>
+      <a href="#store">STORE</a>
+    </nav>
 
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: .16;
-  background-image: radial-gradient(#a9d9ff 1px, transparent 1px);
-  background-size: 32px 32px;
-}
+    <a class="nav-button" href="#connect">PLAY NOW ↗</a>
+  </header>
 
-@keyframes backgroundMove {
-  0%, 100% { background-position: 0% 0%; }
-  50% { background-position: 100% 100%; }
-}
+  <main>
+    <!-- HERO -->
+    <section class="hero section" id="home">
+      <div class="hero-content">
+        <div class="status-pill">
+          <span class="status-dot" id="statusDot"></span>
+          <span id="serverStatus">CHECKING SERVER...</span>
+        </div>
 
-@keyframes rotateRGB {
-  to { transform: rotate(360deg); }
-}
+        <p class="eyebrow">YOUR NEXT ADVENTURE STARTS HERE</p>
 
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 22px 6%;
-  background: #050414eF;
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid #00f7ff88;
-  box-shadow: 0 0 25px #00f7ff22;
-}
+        <h1 class="hero-title">
+          ᴠᴀʟᴛʀᴇx
+          <span class="gradient-text">ɴᴇᴛᴡᴏʀᴋ</span>
+        </h1>
 
-.logo {
-  color: var(--cyan);
-  text-decoration: none;
-  font-weight: 900;
-  font-size: 20px;
-  letter-spacing: 2px;
-  text-shadow: 0 0 15px var(--cyan);
-}
+        <p class="hero-description">
+          Enter a world of adventure, build your legacy,
+          conquer challenges, and become a legend.
+        </p>
 
-.logo span {
-  color: white;
-}
+        <div class="hero-buttons">
+          <a href="#connect" class="button button-primary">
+            <span>▶</span> PLAY NOW
+          </a>
+          <a href="#community" class="button button-secondary">
+            JOIN DISCORD ↗
+          </a>
+        </div>
 
-nav {
-  display: flex;
-  gap: 25px;
-  flex-wrap: wrap;
-}
+        <div class="server-address" id="serverAddressBox">
+          <span class="address-icon">⌘</span>
+          <div>
+            <small>MINECRAFT SERVER IP</small>
+            <strong id="serverAddress">play.example.com</strong>
+          </div>
+          <button id="copyIpButton" class="copy-button"
+                  type="button" aria-label="Copy server IP">
+            COPY
+          </button>
+        </div>
 
-nav a {
-  color: white;
-  text-decoration: none;
-  font-size: 11px;
-  font-weight: bold;
-  transition: .3s;
-}
+        <p class="copy-message" id="copyMessage" aria-live="polite"></p>
+      </div>
 
-nav a:hover {
-  color: var(--cyan);
-  text-shadow: 0 0 15px var(--cyan);
-}
+      <div class="hero-visual">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
 
-.hero {
-  min-height: 85vh;
-  padding: 75px 18px 55px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background: radial-gradient(ellipse at center, #071a4599, transparent 70%);
-}
+        <div class="hero-glow"></div>
 
-.cube {
-  width: 110px;
-  height: 110px;
-  display: grid;
-  place-items: center;
-  margin-bottom: 35px;
-  border: 1px solid var(--cyan);
-  border-radius: 20px;
-  background: linear-gradient(135deg, #00eaff44, #8000ff66, #ff00c844);
-  box-shadow: 0 0 25px var(--cyan), 0 0 60px var(--purple),
-              inset 0 0 25px #ffffff33;
-  transform: perspective(500px) rotateX(-15deg) rotateY(20deg);
-  animation: cubeFloat 4s ease-in-out infinite;
-}
+        <div class="floating-card card-top">
+          <span class="card-symbol">✦</span>
+          <div>
+            <strong>EPIC ADVENTURES</strong>
+            <small>YOUR STORY BEGINS</small>
+          </div>
+        </div>
 
-.cube span {
-  font-size: 65px;
-  font-weight: 900;
-  text-shadow: 0 0 15px var(--cyan), 0 0 35px var(--purple);
-}
+        <div class="minecraft-scene">
+          <div class="scene-light"></div>
+          <div class="block block-back"></div>
+          <div class="block block-left"></div>
+          <div class="block block-right"></div>
+          <div class="block block-front"></div>
+          <div class="block block-top"></div>
+          <div class="scene-caption">ENTER THE WORLD</div>
+        </div>
 
-@keyframes cubeFloat {
-  0%, 100% {
-    transform: perspective(500px) translateY(0) rotateX(-15deg) rotateY(20deg);
-  }
-  50% {
-    transform: perspective(500px) translateY(-12px) rotateX(15deg) rotateY(-20deg);
-  }
-}
+        <div class="floating-card card-bottom">
+          <span class="online-icon">●</span>
+          <div>
+            <strong id="playerCount">-- / --</strong>
+            <small>PLAYERS ONLINE</small>
+          </div>
+        </div>
+      </div>
 
-.eyebrow {
-  color: var(--cyan);
-  font-size: 11px;
-  letter-spacing: 4px;
-  margin-bottom: 20px;
-}
+      <div class="scroll-indicator">
+        <span></span> SCROLL TO EXPLORE
+      </div>
+    </section>
 
-h1 {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 25px;
-  font-size: clamp(40px, 8vw, 90px);
-  line-height: 1.1;
-  letter-spacing: 4px;
-}
+    <!-- STATS -->
+    <section class="stats section" aria-label="Server statistics">
+      <div class="stat-card">
+        <span class="stat-icon">⚔</span>
+        <strong id="statPlayers">--</strong>
+        <small>PLAYERS ONLINE</small>
+      </div>
 
-.cyan {
-  color: var(--cyan);
-  text-shadow: 0 0 15px #00f7ff99, 0 0 40px #00f7ff44;
-}
+      <div class="stat-card">
+        <span class="stat-icon">◆</span>
+        <strong>24/7*</strong>
+        <small>ADVENTURE</small>
+      </div>
 
-.rgb-text {
-  color: transparent;
-  background: linear-gradient(90deg, #00f7ff, #736bff, #ff28ce, #ffb000, #00f7ff);
-  background-size: 300% auto;
-  background-clip: text;
-  -webkit-background-clip: text;
-  animation: textRGB 5s linear infinite;
-}
+      <div class="stat-card">
+        <span class="stat-icon">✦</span>
+        <strong>RGB</strong>
+        <small>NEON EXPERIENCE</small>
+      </div>
 
-@keyframes textRGB {
-  to { background-position: 300% center; }
-}
+      <div class="stat-card">
+        <span class="stat-icon">∞</span>
+        <strong>YOUR</strong>
+        <small>LEGACY STARTS HERE</small>
+      </div>
+    </section>
 
-.subtitle {
-  color: #d8e4ff;
-  font-size: clamp(10px, 2vw, 15px);
-  letter-spacing: 2px;
-  line-height: 1.8;
-}
+    <!-- FEATURES -->
+    <section class="section content-section" id="features">
+      <div class="section-heading">
+        <span class="eyebrow">BUILT FOR ADVENTURERS</span>
+        <h2>ENTER THE <span class="gradient-text">NEXT LEVEL</span></h2>
+        <p>Explore, compete, build, and make every moment count.</p>
+      </div>
 
-.actions {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin: 30px 0;
-}
+      <div class="feature-grid">
+        <article class="glass-card feature-card">
+          <div class="feature-icon">⚔️</div>
+          <h3>EPIC PVP</h3>
+          <p>Challenge other players and prove your skills in battle.</p>
+          <span class="card-number">01</span>
+        </article>
 
-.btn {
-  min-height: 50px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 15px 26px;
-  border-radius: 10px;
-  color: white;
-  text-decoration: none;
-  font: 800 11px 'Orbitron', sans-serif;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: .3s;
-}
+        <article class="glass-card feature-card">
+          <div class="feature-icon">🌍</div>
+          <h3>OPEN WORLD</h3>
+          <p>Explore, gather resources, build bases, and create your story.</p>
+          <span class="card-number">02</span>
+        </article>
 
-.rgb-button {
-  border: 1px solid var(--cyan);
-  background: linear-gradient(110deg, #006dff, #8b00ff, #ff00b7, #006dff);
-  background-size: 250% 100%;
-  animation: textRGB 5s linear infinite;
-  box-shadow: 0 0 22px #8b27ff55;
-}
+        <article class="glass-card feature-card">
+          <div class="feature-icon">💎</div>
+          <h3>REWARDS</h3>
+          <p>Discover rewards, unlock goals, and customize your adventure.</p>
+          <span class="card-number">03</span>
+        </article>
+      </div>
+    </section>
 
-.glass-button {
-  background: #080b20dd;
-  border: 1px solid var(--purple);
-  box-shadow: inset 0 0 20px #7d3cff22;
-}
+    <!-- RANKS -->
+    <section class="section content-section" id="ranks">
+      <div class="section-heading">
+        <span class="eyebrow">CHOOSE YOUR DESTINY</span>
+        <h2>SERVER <span class="gradient-text">RANKS</span></h2>
+        <p>Discover the ranks available on your network.</p>
+      </div>
 
-.btn:hover {
-  transform: translateY(-5px) scale(1.03);
-  box-shadow: 0 0 30px var(--pink);
-}
+      <div class="rank-grid">
+        <article class="rank-card rank-vip">
+          <div class="rank-symbol">✦</div>
+          <h3>VIP</h3>
+          <p>Begin your journey in style.</p>
+          <a href="#store" class="rank-link">VIEW STORE ↗</a>
+        </article>
 
-.ip-panel {
-  width: min(680px, 95%);
-  display: flex;
-  align-items: center;
-  gap: 17px;
-  flex-wrap: wrap;
-  padding: 20px;
-  margin-top: 10px;
-  text-align: left;
-  border: 1px solid transparent;
-  border-radius: 15px;
-  background:
-    linear-gradient(#070a1df2, #070a1df2) padding-box,
-    linear-gradient(100deg, var(--cyan), var(--purple), var(--pink)) border-box;
-  box-shadow: 0 0 28px #00eaff22, inset 0 0 25px #7000ff15;
-  backdrop-filter: blur(15px);
-}
+        <article class="rank-card rank-elite">
+          <div class="rank-symbol">◆</div>
+          <h3>ELITE</h3>
+          <p>Stand out from the crowd.</p>
+          <a href="#store" class="rank-link">VIEW STORE ↗</a>
+        </article>
 
-.ip-icon {
-  width: 48px;
-  height: 48px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--cyan);
-  border-radius: 12px;
-  color: var(--cyan);
-  font-size: 25px;
-  box-shadow: 0 0 15px #00eaff33;
-}
+        <article class="rank-card rank-legend">
+          <div class="rank-symbol">♛</div>
+          <h3>LEGEND</h3>
+          <p>Make your name unforgettable.</p>
+          <a href="#store" class="rank-link">VIEW STORE ↗</a>
+        </article>
+      </div>
 
-.ip-details {
-  flex: 1;
-  min-width: 130px;
-}
+      <p class="section-note">
+        Rank names and benefits are sample content. Customize them to match
+        the ranks configured on your Minecraft server.
+      </p>
+    </section>
 
-.ip-details small {
-  color: var(--cyan);
-  font-size: 9px;
-  letter-spacing: 2px;
-}
+    <!-- CONNECT -->
+    <section class="section connect-section" id="connect">
+      <div class="connect-panel glass-card">
+        <div class="connect-decoration">V</div>
+        <span class="eyebrow">YOUR ADVENTURE AWAITS</span>
+        <h2>READY TO <span class="gradient-text">PLAY?</span></h2>
+        <p>Open Minecraft Java Edition, add our server address, and join the adventure.</p>
 
-.ip-details p {
-  margin-top: 8px;
-  font-size: clamp(10px, 2vw, 14px);
-  overflow-wrap: anywhere;
-}
+        <div class="connect-ip">
+          <code id="connectAddress">play.example.com</code>
+          <button class="button button-primary" id="copyConnectIp" type="button">
+            COPY IP
+          </button>
+        </div>
 
-.copy-button {
-  padding: 14px 18px;
-  color: #00101d;
-  border: 0;
-  border-radius: 8px;
-  background: var(--cyan);
-  font-weight: 900;
-  cursor: pointer;
-  box-shadow: 0 0 18px #00eaff55;
-}
+        <p class="version-note">
+          Minecraft Java Edition · Set your compatible server version here
+        </p>
+      </div>
+    </section>
 
-#copy-status {
-  min-height: 20px;
-  color: var(--cyan);
-  font-size: 12px;
-}
+    <!-- COMMUNITY -->
+    <section class="section content-section" id="community">
+      <div class="section-heading">
+        <span class="eyebrow">STAY CONNECTED</span>
+        <h2>JOIN OUR <span class="gradient-text">COMMUNITY</span></h2>
+        <p>Meet players, share your achievements, and get server updates.</p>
+      </div>
 
-.section {
-  padding: 80px 7%;
-  text-align: center;
-  scroll-margin-top: 90px;
-}
+      <div class="community-grid">
+        <article class="glass-card community-card discord-card">
+          <div class="community-icon">◈</div>
+          <h3>DISCORD</h3>
+          <p>Chat with the community and get the latest news.</p>
+          <a class="button button-primary" id="discordButton"
+             href="https://discord.com/" target="_blank"
+             rel="noopener noreferrer">JOIN DISCORD ↗</a>
+        </article>
 
-h2 {
-  font-size: clamp(26px, 5vw, 45px);
-  margin: 15px 0 40px;
-}
+        <article class="glass-card community-card">
+          <div class="community-icon">🏆</div>
+          <h3>LEADERBOARD</h3>
+          <p>Compete with other players and climb the rankings.</p>
+          <a class="button button-secondary" href="#features">EXPLORE FEATURES</a>
+        </article>
+      </div>
+    </section>
 
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
-  max-width: 1100px;
-  margin: auto;
-}
+    <!-- STORE AND VOTE -->
+    <section class="section content-section" id="store">
+      <div class="section-heading">
+        <span class="eyebrow">SUPPORT THE NETWORK</span>
+        <h2>STORE <span class="gradient-text">& VOTE</span></h2>
+        <p>Support the server and help the community grow.</p>
+      </div>
 
-.card {
-  position: relative;
-  overflow: hidden;
-  padding: 32px 24px;
-  min-height: 220px;
-  border: 1px solid var(--cyan);
-  border-radius: 15px;
-  background: linear-gradient(145deg, #0b1430ee, #070615ee);
-  box-shadow: 0 0 22px #00eaff18;
-  text-align: left;
-  transition: .3s;
-}
+      <div class="action-grid">
+        <article class="glass-card action-card">
+          <div class="feature-icon">🛒</div>
+          <h3>SERVER STORE</h3>
+          <p>Explore available ranks and server perks.</p>
+          <a class="button button-primary" id="storeButton"
+             href="#store">OPEN STORE ↗</a>
+        </article>
 
-.card:hover {
-  transform: perspective(700px) rotateX(4deg) rotateY(-4deg) translateY(-8px);
-  box-shadow: 0 15px 40px #00eaff33;
-}
+        <article class="glass-card action-card">
+          <div class="feature-icon">⭐</div>
+          <h3>VOTE FOR US</h3>
+          <p>Support the network through its official vote page.</p>
+          <a class="button button-secondary" id="voteButton"
+             href="#store">VOTE NOW ↗</a>
+        </article>
+      </div>
+    </section>
+  </main>
 
-.purple-card { border-color: var(--purple); }
-.pink-card { border-color: var(--pink); }
+  <!-- FOOTER -->
+  <footer class="footer">
+    <a class="brand footer-brand" href="#home">
+      <span class="brand-icon">V</span>
+      <span>VALTREX <b>NETWORK</b></span>
+    </a>
 
-.card-icon {
-  font-size: 35px;
-  color: var(--cyan);
-  margin-bottom: 25px;
-  text-shadow: 0 0 15px currentColor;
-}
+    <p>Craft your legacy. Explore your world.</p>
+    <p class="copyright">
+      © <span id="currentYear"></span> VALTREX NETWORK.
+      Not affiliated with Mojang or Microsoft.
+    </p>
+  </footer>
 
-.purple-card .card-icon { color: #c17aff; }
-.pink-card .card-icon { color: #ff73df; }
+  <button id="backToTop" class="back-to-top"
+          type="button" aria-label="Back to top">↑</button>
 
-.card h3 {
-  margin-bottom: 14px;
-  font-size: 14px;
-}
-
-.card p {
-  color: #b9c8e9;
-  font-size: 14px;
-  line-height: 1.7;
-}
-
-.join-section {
-  background: radial-gradient(ellipse at center, #42008044, transparent 70%);
-}
-
-.join-section > p:not(.eyebrow) {
-  color: #b9c8e9;
-}
-
-footer {
-  padding: 25px 15px;
-  text-align: center;
-  color: #b9c8e9;
-  background: #03030dee;
-  border-top: 1px solid #a100ff88;
-}
-
-@media (max-width: 700px) {
-  .topbar {
-    justify-content: center;
-    text-align: center;
-  }
-
-  .logo {
-    width: 100%;
-  }
-
-  nav {
-    justify-content: center;
-    gap: 15px;
-  }
-
-  nav a { font-size: 10px; }
-
-  .hero { min-height: auto; padding: 60px 15px; }
-  .cards { grid-template-columns: 1fr; }
-  .section { padding: 60px 18px; }
-  .ip-panel { justify-content: center; text-align: center; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-  }
-}
+  <script src="script.js"></script>
+</body>
+</html>
+```
